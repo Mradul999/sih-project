@@ -1,14 +1,18 @@
-import React from 'react'
+import React from "react";
 
 const addProduct = () => {
   return (
-    <div>
+    <div className=" w-screen flex justify-center items-center">
+    
+        <div>
+            <form action="">
+                <input type="text" />
+            </form>
+        </div>
 
-      
-        
-      
+     
     </div>
-  )
-}
+  );
+};
 
-export default addProduct
+export default addProduct;
