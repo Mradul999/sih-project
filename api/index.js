@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import signupRoute from "./routes/auth.route.js";
+import addproductRoute from "./routes/product.route.js"
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -15,6 +16,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/api/auth", signupRoute);
+app.use("/api/product",addproductRoute)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
