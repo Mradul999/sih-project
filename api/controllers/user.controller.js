@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
     res.status(201).json({ newUser });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server Error" });
+    res.status(500).json({ msg: "Internal server Error" });
   }
 };
 
@@ -45,6 +45,6 @@ export const signin = async (req, res) => {
     res.status(201).json({ user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server Error" });
+    res.status(500).json({ msg: "Internal server Error" });
   }
 };
