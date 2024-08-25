@@ -4,10 +4,11 @@ import bcrypt from "bcryptjs";
 export const signup = async (req, res) => {
   try {
     const { firstName, lastName, phoneNo, password, role } = req.body;
+    // console.log("phoneNo=>",phoneNo);
 
     const existingUser = await User.findOne({ phoneNo });
     if (existingUser) {
-      return res.status(400).json({ msg: "User already exists" });
+      return res.status(403).json({ msg: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -40,7 +41,7 @@ export const signin = async (req, res) => {
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid credentials" });
+      return res.status(401).json({ msg: "Invalid credentials" });
     }
     res.status(201).json({ user });
   } catch (error) {
