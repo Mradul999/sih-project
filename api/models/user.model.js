@@ -26,6 +26,31 @@ const userSchema = new mongoose.Schema(
       required: true,
       enum: ["farmer", "buyer"],
     },
+    pincode: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    ownerName: {
+      type: String,
+      required: true,
+    },
+    landDimension: {
+      type: String,
+      required: true,
+    },
+    khatoni:{
+      type: String,
+      required: true,
+    }
+    
   },
   { timestamps: true }
 );

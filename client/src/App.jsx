@@ -5,11 +5,13 @@ import AddProduct from "./pages/AddProduct";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import Nav from "./components/nav";
 
 const App = () => {
   return (
     <div>
       <BrowserRouter>
+        <Nav></Nav>
         <Routes>
           <Route
             path="/add-product"

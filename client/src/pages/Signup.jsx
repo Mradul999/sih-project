@@ -37,7 +37,7 @@ const Signup = () => {
   // console.log(formData);
 
   return (
-    <div className="bg-gray-100 flex items-center justify-center h-screen">
+    <div className="bg-gray-100 flex items-center justify-center py-10">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
         <form onSubmit={submitHandler}>

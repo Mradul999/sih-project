@@ -3,7 +3,20 @@ import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
   try {
-    const { firstName, lastName, phoneNo, password, role } = req.body;
+    const {
+      firstName,
+      lastName,
+      phoneNo,
+      password,
+      role,
+      pincode,
+      state,
+      address,
+      ownerName,
+      landDimension,
+      khatoni
+
+    } = req.body;
     // console.log("phoneNo=>",phoneNo);
 
     const existingUser = await User.findOne({ phoneNo });
@@ -22,6 +35,13 @@ export const signup = async (req, res) => {
       phoneNo,
       password: hashedPassword,
       role,
+      pincode,
+      state,
+      address,
+      ownerName,
+      landDimension,
+      khatoni
+
     });
     await newUser.save();
     res.status(201).json({ newUser });
