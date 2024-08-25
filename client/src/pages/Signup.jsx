@@ -59,19 +59,19 @@ const Signup = () => {
       (error) => {
         console.error("Upload Error:", error); // Log detailed error information
         setAadharUploading(false);
-        setAdharUploadingError("Error while uploading aadhar: " + error.message);
+        setAdharUploadingError(
+          "Error while uploading aadhar: " + error.message
+        );
       },
       () => {
         // When the upload is complete, get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
- 
           setFormData({ ...formData, aadhar: downloadURL });
           setAadharUploading(false);
         });
       }
     );
   };
-
 
   const uplaodKhatoni = async (e) => {
     e.preventDefault();
@@ -95,12 +95,13 @@ const Signup = () => {
       (error) => {
         console.error("Upload Error:", error); // Log detailed error information
         setKhatoniUploading(false);
-        setKhatoniUploadingError("Error while uploading khatoni: " + error.message);
+        setKhatoniUploadingError(
+          "Error while uploading khatoni: " + error.message
+        );
       },
       () => {
         // When the upload is complete, get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
- 
           setFormData({ ...formData, khatoni: downloadURL });
           setKhatoniUploading(false);
         });

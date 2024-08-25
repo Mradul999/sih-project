@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
-    name:{
+    name: {
       type: String,
       required: true,
     },
@@ -30,31 +30,28 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    district:{
+    district: {
       type: String,
       required: true,
-
     },
     address: {
       type: String,
       required: true,
     },
-   
+
     farmSize: {
       type: String,
       required: true,
     },
-    khatoni:{
-      type:String,
-      required:true
-      
+    khatoni: {
+      type: String,
+      required: true,
     },
-    aadhar:{
+    aadhar: {
       type: String,
       required: true,
       unique: true,
-    }
-    
+    },
   },
   { timestamps: true }
 );
