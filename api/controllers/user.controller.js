@@ -4,18 +4,18 @@ import bcrypt from "bcryptjs";
 export const signup = async (req, res) => {
   try {
     const {
-      firstName,
-      lastName,
+      name,
       phoneNo,
       password,
       role,
       pincode,
       state,
+      aadhar,
+      district,
       address,
-      ownerName,
-      landDimension,
-      khatoni
 
+      farmSize,
+      khatoni,
     } = req.body;
     // console.log("phoneNo=>",phoneNo);
 
@@ -26,22 +26,23 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const username =
-      firstName + lastName + Math.floor(1000 + Math.random() * 9000);
+      name.toLowerCase().replace(/\s+/g, "") +
+      Math.floor(1000 + Math.random() * 9000);
 
     const newUser = new User({
-      firstName,
-      lastName,
+      name,
       username,
       phoneNo,
       password: hashedPassword,
       role,
+      district,
       pincode,
       state,
+      aadhar,
       address,
-      ownerName,
-      landDimension,
-      khatoni
 
+      farmSize,
+      khatoni,
     });
     await newUser.save();
     res.status(201).json({ newUser });

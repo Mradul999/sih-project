@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import app from "../firebase.js";
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const AddProduct = () => {
   const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imgUploadLoading, setImgUploadLoading] = useState(false);
+  const [imgUploadingError, setImgUploadingError] = useState("");
+  const [formData, setFormData] = useState({});
+  // console.log("formData",formData);
+
+  const formChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
 
   const imageChangeHandler = (e) => {
     setImage(e.target.files[0]);
@@ -23,53 +26,140 @@ const AddProduct = () => {
       return;
     }
 
+    setImgUploadLoading(true);
+    setImgUploadingError("");
+
     const storage = getStorage(app);
-    const storageRef = ref(storage, `images/${image.name}`);
+    const imageName = new Date().getTime() + "-" + image.name; // Added dash for better readability
+    const storageRef = ref(storage, `images/${imageName}`); // Use a directory structure for storage path
+
     const uploadTask = uploadBytesResumable(storageRef, image);
 
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        // Progress handling (optional)
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
+        // You can also show upload progress here
       },
       (error) => {
-        // Handle any errors during upload
-        console.error("Upload failed:", error);
+        console.error("Upload Error:", error); // Log detailed error information
+        setImgUploadLoading(false);
+        setImgUploadingError("Error while uploading image: " + error.message);
       },
       () => {
         // When the upload is complete, get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          setImageUrl(downloadURL);
-          console.log("File available at", downloadURL);
+          setFormData({ ...formData, image: downloadURL });
+          setImgUploadLoading(false);
         });
       }
     );
   };
 
+  const submitProductHandler = (e) => {
+    e.preventDefault();
+    // Handle product submission logic
+    console.log({
+      name: formData.name,
+      price: formData.price,
+      description: formData.description,
+      category: formData.category,
+      imageUrl: formData.image,
+    });
+  };
+
   return (
-    <div className="w-screen flex justify-center items-center">
-      <div>
-        <form onSubmit={uploadImageHandler} className="flex flex-col gap-10">
-          <input onChange={imageChangeHandler} type="file" accept="image/*" />
+    <div className="flex bg-gray-100 justify-center items-start w-screen p-10">
+      {/* Left Side: Product Form */}
+      <div className="w-1/2 p-6 bg-white shadow-lg rounded-lg">
+        <form onSubmit={submitProductHandler} className="flex flex-col gap-6">
+          <div>
+            <label className="block text-lg font-semibold mb-2">Product Name</label>
+            <input
+              id="name"
+              type="text"
+              className="w-full p-2 border rounded-lg"
+              onChange={formChangeHandler}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-lg font-semibold mb-2">Price</label>
+            <input
+              id="price"
+              type="number"
+              className="w-full p-2 border rounded-lg"
+              onChange={formChangeHandler}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-lg font-semibold mb-2">Description</label>
+            <textarea
+              id="description"
+              className="w-full p-2 border rounded-lg"
+              onChange={formChangeHandler}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-lg font-semibold mb-2">Category</label>
+            <select
+              id="category"
+              className="border w-full rounded-lg p-2"
+              onChange={formChangeHandler}
+              required
+            >
+              <option value="">Select category</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Seeds">Seeds</option>
+              <option value="Insecticides">Insecticides</option>
+              <option value="Pesticides">Pesticides</option>
+              <option value="Fertilizers">Fertilizers</option>
+            </select>
+          </div>
           <button
             type="submit"
-            className="bg-red-600 p-2 rounded-md text-white text-lg"
+            className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700"
           >
-            Upload
+            Add your product
           </button>
         </form>
-        {imageUrl && (
+      </div>
+
+      {/* Right Side: Image Upload Section */}
+      <div className="w-1/2 p-6 bg-white shadow-lg rounded-lg ml-10">
+        <form onSubmit={uploadImageHandler} className="flex flex-col gap-6">
+          <input
+            onChange={imageChangeHandler}
+            type="file"
+            accept="image/*"
+            className="w-full p-2 border rounded-lg"
+          />
+          {imgUploadingError && (
+            <span className="text-red-600 font-semibold">{imgUploadingError}</span>
+          )}
+          <button
+            type="submit"
+            className="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700"
+          >
+            {imgUploadLoading ? (
+              <div className="flex justify-center">
+                <ThreeDots
+                  height="30"
+                  width="50"
+                  radius="9"
+                  color="white"
+                  ariaLabel="loading"
+                />
+              </div>
+            ) : (
+              "Upload your product image"
+            )}
+          </button>
+        </form>
+        {formData.image && (
           <div className="mt-4">
-            <p>Image uploaded successfully! Here's the URL:</p>
-            <a href={imageUrl} target="_blank" rel="noopener noreferrer">
-              {imageUrl}
-            </a>
-            <div>
-              <img src={imageUrl} alt="Uploaded" className="mt-4 w-64" />
-            </div>
+            <img src={formData.image} alt="Uploaded" className="w-full" />
           </div>
         )}
       </div>

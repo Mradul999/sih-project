@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
+    name:{
       type: String,
       required: true,
     },
@@ -34,21 +30,29 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    district:{
+      type: String,
+      required: true,
+
+    },
     address: {
       type: String,
       required: true,
     },
-    ownerName: {
-      type: String,
-      required: true,
-    },
-    landDimension: {
+   
+    farmSize: {
       type: String,
       required: true,
     },
     khatoni:{
+      type:String,
+      required:true
+      
+    },
+    aadhar:{
       type: String,
       required: true,
+      unique: true,
     }
     
   },

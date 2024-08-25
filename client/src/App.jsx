@@ -9,7 +9,7 @@ import Nav from "./components/nav";
 
 const App = () => {
   return (
-    <div>
+    <div className=" min-h-screen">
       <BrowserRouter>
         <Nav></Nav>
         <Routes>
@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/" element={<Home></Home>}></Route>
           <Route path="/sign-in" element={<Signin></Signin>}></Route>
           <Route path="/sign-up" element={<Signup></Signup>}></Route>
+        
         </Routes>
       </BrowserRouter>
     </div>
