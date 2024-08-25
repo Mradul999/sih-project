@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import app from "../firebase.js";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddProduct = () => {
   const [image, setImage] = useState(null);
   const [imgUploadLoading, setImgUploadLoading] = useState(false);
   const [imgUploadingError, setImgUploadingError] = useState("");
   const [formData, setFormData] = useState({});
+
+  const currentUser=useSelector((state)=>state.user);
   // console.log("formData",formData);
 
   const formChangeHandler = (e) => {
@@ -55,16 +59,28 @@ const AddProduct = () => {
     );
   };
 
-  const submitProductHandler = (e) => {
+  const submitProductHandler = async(e) => {
+    setFormData({...formData,userId:currentUser?.currentUser?._id});
     e.preventDefault();
-    // Handle product submission logic
-    console.log({
-      name: formData.name,
-      price: formData.price,
-      description: formData.description,
-      category: formData.category,
-      imageUrl: formData.image,
-    });
+    try {
+
+      const response=await axios.post("/api/product/addproduct",formData);
+      if(response.status===201){
+        alert("Product added successfully");
+        setFormData({});
+        setImage(null);
+
+      } 
+      
+    } catch (error) {
+      console.log(error);
+      if(error.response){
+
+        alert("Error occured");
+      }
+      
+    }
+    
   };
 
   return (
