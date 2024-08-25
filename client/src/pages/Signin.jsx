@@ -1,12 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { signinSuccess } from "../redux/user.slice";
 
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const Signin = () => {
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState({});
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
   // console.log(formData);
 
   const changeHandler = (e) => {
@@ -19,7 +23,9 @@ const Signin = () => {
     try {
       const response = await axios.post("/api/auth/signin", formData);
       if (response.status == 201) {
+        console.log("response", response);
         navigate("/");
+        dispatch(signinSuccess(response.data.user));
       }
     } catch (error) {
       if (error.response) {
@@ -41,7 +47,7 @@ const Signin = () => {
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={submitHandler}>
           <div class="mb-4">
-            <label for="phone" class="block text-gray-700 font-semibold mb-2">
+            <label for="phoneNo" class="block text-gray-700 font-semibold mb-2">
               Phone Number
             </label>
             <input

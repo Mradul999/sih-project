@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import app from "../firebase.js";
 import { ThreeDots } from "react-loader-spinner";
+import { useDispatch } from "react-redux";
+import { signinSuccess } from "../redux/user.slice.js";
 import {
   getStorage,
   ref,
@@ -19,6 +21,8 @@ const Signup = () => {
   const [khatoniUploading, setKhatoniUploading] = useState(false);
 
   const [khatoniUploadingError, setKhatoniUploadingError] = useState("");
+
+  const dispatch=useDispatch((state)=>state.user);
 
   const [file, setFile] = useState({});
   console.log(file);
@@ -114,9 +118,12 @@ const Signup = () => {
 
     try {
       const response = await axios.post("/api/auth/signup", formData);
+      // console.log("response",response);
 
       if (response.status === 201) {
         alert("Signup successful, please login");
+    
+
         navigate("/sign-in");
       }
     } catch (error) {
