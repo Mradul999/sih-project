@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Tutorials = () => {
   const navigate = useNavigate();
@@ -7,6 +8,29 @@ const Tutorials = () => {
   const clickHandler = (path) => {
     navigate(path);
   };
+
+  useEffect(() => {
+    const addGoogleTranslateScript = () => {
+      if (document.querySelector("#google-translate-script")) return; // Prevent re-adding the script
+
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.type = "text/javascript";
+      script.src =
+        "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          { pageLanguage: "en" },
+          "google_translate_element"
+        );
+      };
+    };
+
+    addGoogleTranslateScript();
+  }, []);
 
   const tutorialsData = [
     {
@@ -36,8 +60,14 @@ const Tutorials = () => {
   ];
 
   return (
-    <div className=" flex overflow-x-hidden justify-center mx-2">
+    <div className="relative flex overflow-x-hidden justify-center mx-2">
       <div className="max-w-[1000px] w-full my-4">
+        {/* Google Translate Element */}
+        <div
+          id="google_translate_element"
+          className="absolute bottom-4 right-4 z-50" // Position the widget in the bottom-right corner
+        ></div>
+
         <h1 className="text-center font-bold text-2xl mb-6">
           Welcome to Tutorials
         </h1>
@@ -45,9 +75,9 @@ const Tutorials = () => {
         <div className="flex flex-col gap-8">
           {tutorialsData.map((tutorial, index) => (
             <div
-              onClick={()=>clickHandler(tutorial.path)}
+              onClick={() => clickHandler(tutorial.path)}
               key={index}
-              className="flex bg-white shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 duratio rounded-lg overflow-hidden min-h-[250px]" // Added a min height
+              className="flex bg-white shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden min-h-[250px]"
             >
               <div className="w-1/3">
                 <img
