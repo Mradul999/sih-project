@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import app from "../firebase.js";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [image, setImage] = useState(null);
@@ -11,7 +17,10 @@ const AddProduct = () => {
   const [imgUploadingError, setImgUploadingError] = useState("");
   const [formData, setFormData] = useState({});
 
-  const currentUser=useSelector((state)=>state.user);
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.user);
+
   // console.log("formData",formData);
 
   const formChangeHandler = (e) => {
@@ -59,37 +68,37 @@ const AddProduct = () => {
     );
   };
 
-  const submitProductHandler = async(e) => {
-    setFormData({...formData,userId:currentUser?.currentUser?._id});
+  const submitProductHandler = async (e) => {
     e.preventDefault();
+    const formData = {
+      ...formData,
+      userId: currentUser?.currentUser?._id,
+    };
     try {
-
-      const response=await axios.post("/api/product/addproduct",formData);
-      if(response.status===201){
+      const response = await axios.post("/api/product/addproduct", formData);
+      if (response.status === 201) {
         alert("Product added successfully");
         setFormData({});
         setImage(null);
-
-      } 
-      
+        navigate("/all-products");
+      }
     } catch (error) {
       console.log(error);
-      if(error.response){
-
+      if (error.response) {
         alert("Error occured");
       }
-      
     }
-    
   };
 
   return (
-    <div className="flex bg-gray-100 justify-center items-start w-screen p-10">
+    <div className="flex bg-gray-100 justify-center items-start    w-screen p-10">
       {/* Left Side: Product Form */}
       <div className="w-1/2 p-6 bg-white shadow-lg rounded-lg">
         <form onSubmit={submitProductHandler} className="flex flex-col gap-6">
           <div>
-            <label className="block text-lg font-semibold mb-2">Product Name</label>
+            <label className="block text-lg font-semibold mb-2">
+              Product Name
+            </label>
             <input
               id="name"
               type="text"
@@ -109,7 +118,9 @@ const AddProduct = () => {
             />
           </div>
           <div>
-            <label className="block text-lg font-semibold mb-2">Description</label>
+            <label className="block text-lg font-semibold mb-2">
+              Description
+            </label>
             <textarea
               id="description"
               className="w-full p-2 border rounded-lg"
@@ -131,6 +142,8 @@ const AddProduct = () => {
               <option value="Insecticides">Insecticides</option>
               <option value="Pesticides">Pesticides</option>
               <option value="Fertilizers">Fertilizers</option>
+              <option value="vegetables">vegetables</option>
+              <option value="fruits">Fruits</option>
             </select>
           </div>
           <button
@@ -143,7 +156,7 @@ const AddProduct = () => {
       </div>
 
       {/* Right Side: Image Upload Section */}
-      <div className="w-1/2 p-6 bg-white shadow-lg rounded-lg ml-10">
+      <div className="w-1/2 p-6 bg-white shadow-lg  rounded-lg ml-10">
         <form onSubmit={uploadImageHandler} className="flex flex-col gap-6">
           <input
             onChange={imageChangeHandler}
@@ -152,7 +165,9 @@ const AddProduct = () => {
             className="w-full p-2 border rounded-lg"
           />
           {imgUploadingError && (
-            <span className="text-red-600 font-semibold">{imgUploadingError}</span>
+            <span className="text-red-600 font-semibold">
+              {imgUploadingError}
+            </span>
           )}
           <button
             type="submit"
