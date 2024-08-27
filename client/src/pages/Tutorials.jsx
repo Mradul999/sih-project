@@ -19,6 +19,7 @@ const Tutorials = () => {
       script.src =
         "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
       script.async = true;
+
       document.body.appendChild(script);
 
       window.googleTranslateElementInit = () => {
@@ -26,6 +27,8 @@ const Tutorials = () => {
           { pageLanguage: "en" },
           "google_translate_element"
         );
+
+       
       };
     };
 
@@ -62,12 +65,6 @@ const Tutorials = () => {
   return (
     <div className="relative flex overflow-x-hidden justify-center mx-2">
       <div className="max-w-[1000px] w-full my-4">
-        {/* Google Translate Element */}
-        <div
-          id="google_translate_element"
-          className="absolute bottom-4 right-4 z-50" // Position the widget in the bottom-right corner
-        ></div>
-
         <h1 className="text-center font-bold text-2xl mb-6">
           Welcome to Tutorials
         </h1>

@@ -11,6 +11,7 @@ import Tutorials from "./pages/Tutorials";
 import VideoTutorials from "./pages/VideoTutorials";
 import Casestudies from "./pages/Casestudies";
 import Blogs from "./pages/Blogs";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/tutorials/case-studies" element={<Casestudies />}></Route>
           <Route path="/tutorials/blogs" element={<Blogs />}></Route>
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
     </div>
   );
