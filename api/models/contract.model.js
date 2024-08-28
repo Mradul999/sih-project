@@ -54,10 +54,7 @@ export const contractSchema = mongoose.Schema(
       default:
         "Law 1: The buyer must purchase the agreed quantity. Law 2: The farmer must deliver within the agreed timeframe.",
     },
-    contractDocument: {
-      type: String,
-      required: true,
-    },
+  
     termsAndConditions:{
       type: String,
       required: true,

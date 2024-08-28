@@ -13,7 +13,7 @@ export const createContract = async (req, res) => {
       startDate,
       endDate,
       minMoney,
-      contractDocument,
+
       paymentTerms,
     } = req.body;
 
@@ -30,7 +30,7 @@ export const createContract = async (req, res) => {
       startDate,
       endDate,
       minMoney,
-      contractDocument,
+
       paymentTerms,
     });
     await newContract.save();
