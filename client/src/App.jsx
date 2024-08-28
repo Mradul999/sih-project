@@ -37,7 +37,6 @@ const App = () => {
           <Route path="/contract-farming" element={<ContractFarming />}></Route>
           <Route path="/contract-farming/my-contracts" element={<YourContracts />}></Route>
           <Route path="/contract-farming/create-contract" element={<CreateContract />}></Route>
-
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
