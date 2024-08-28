@@ -39,7 +39,7 @@ const AllProducts = () => {
   }, [category, searchQuery, products]);
 
   return (
-    <div className="min-w-screen px-2 min-h-screen flex gap-10">
+    <div className="min-w-screen px-2  flex gap-10">
       <div className="bg-gray-100 p-2 flex flex-col gap-6 px-6">
         <form className="flex flex-col gap-2">
           <label htmlFor="search">Search for Products</label>

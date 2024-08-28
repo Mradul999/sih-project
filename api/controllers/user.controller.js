@@ -13,7 +13,6 @@ export const signup = async (req, res) => {
       aadhar,
       district,
       address,
-
       farmSize,
       khatoni,
     } = req.body;
@@ -23,6 +22,8 @@ export const signup = async (req, res) => {
     if (existingUser) {
       return res.status(403).json({ msg: "User already exists" });
     }
+
+    
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const username =

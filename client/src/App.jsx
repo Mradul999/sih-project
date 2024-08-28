@@ -12,6 +12,8 @@ import VideoTutorials from "./pages/VideoTutorials";
 import Casestudies from "./pages/Casestudies";
 import Blogs from "./pages/Blogs";
 import Footer from "./components/Footer";
+import ContractFarming from "./pages/ContractFarming";
+import YourContracts from "./pages/YourContracts";
 
 const App = () => {
   return (
@@ -31,6 +33,9 @@ const App = () => {
           <Route path="/tutorials/video-tutorials" element={<VideoTutorials />}></Route>
           <Route path="/tutorials/case-studies" element={<Casestudies />}></Route>
           <Route path="/tutorials/blogs" element={<Blogs />}></Route>
+          <Route path="/contract-farming" element={<ContractFarming />}></Route>
+          <Route path="/contract-farming/my-contracts" element={<YourContracts />}></Route>
+
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

@@ -24,7 +24,7 @@ const Footer = () => {
     addGoogleTranslateScript();
   }, []);
   return (
-    <div className=" flex bg-slate-800 justify-between px-10 py-10">
+    <div className=" flex bg-slate-800 justify-between items-center px-10 py-5">
       <h1 className=" text-white font-bold text-2xl">LOGO</h1>
       
         <div id="google_translate_element" className="   "></div>
