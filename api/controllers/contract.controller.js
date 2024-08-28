@@ -13,6 +13,7 @@ export const createContract = async (req, res) => {
       startDate,
       endDate,
       minMoney,
+      termsAndConditions,
 
       paymentTerms,
     } = req.body;
@@ -30,6 +31,7 @@ export const createContract = async (req, res) => {
       startDate,
       endDate,
       minMoney,
+      termsAndConditions,
 
       paymentTerms,
     });
@@ -87,7 +89,7 @@ export const acceptContract = async (req, res) => {
   }
 };
 
-export const getAllContracts = async (req,res) => {
+export const getAllContracts = async (req, res) => {
   try {
     const { userId } = req.body;
     const contracts = await Contract.find({ userId });
