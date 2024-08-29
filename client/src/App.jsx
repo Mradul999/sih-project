@@ -16,6 +16,8 @@ import ContractFarming from "./pages/ContractFarming";
 import YourContracts from "./pages/YourContracts";
 import CreateContract from "./pages/CreateContract";
 import Payment from "./pages/Payment";
+import ContractId from "./pages/ContractId";
+import AwaitingContracts from "./pages/AwaitingContracts";
 
 const App = () => {
   return (
@@ -32,13 +34,31 @@ const App = () => {
           <Route path="/sign-up" element={<Signup></Signup>}></Route>
           <Route path="/all-products" element={<AllProducts />}></Route>
           <Route path="/tutorials" element={<Tutorials />}></Route>
-          <Route path="/tutorials/video-tutorials" element={<VideoTutorials />}></Route>
-          <Route path="/tutorials/case-studies" element={<Casestudies />}></Route>
+          <Route
+            path="/tutorials/video-tutorials"
+            element={<VideoTutorials />}
+          ></Route>
+          <Route
+            path="/tutorials/case-studies"
+            element={<Casestudies />}
+          ></Route>
           <Route path="/tutorials/blogs" element={<Blogs />}></Route>
           <Route path="/contract-farming" element={<ContractFarming />}></Route>
-          <Route path="/contract-farming/my-contracts" element={<YourContracts />}></Route>
-          <Route path="/contract-farming/create-contract" element={<CreateContract />}></Route>
-          <Route path="/all-products/payment/:productId" element={<Payment/>}></Route>
+          <Route
+            path="/contract-farming/my-contracts"
+            element={<YourContracts />}
+          ></Route>
+          <Route
+            path="/contract-farming/create-contract"
+            element={<CreateContract />}
+          ></Route>
+          <Route path="/contract-farming/:contractId" element={<ContractId/>}></Route>
+          <Route
+            path="/all-products/payment/:productId"
+            element={<Payment />}
+          ></Route>
+
+          <Route path="/contract-farming/awaiting-contracts" element={<AwaitingContracts/>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const ContractFarming = () => {
-
-
   return (
     <div className="">
       <div className="w-full h-[500px] bg-gray-200 rounded-lg overflow-hidden shadow-lg  ">
@@ -54,14 +52,17 @@ const ContractFarming = () => {
             </div>
           </NavLink>
         </div>
-
-        <div className="flex-1 bg-yellow-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
-          <h2 className="text-3xl font-semibold mb-6 text-yellow-800">
-            Awaiting Contracts
-          </h2>
-          <p className="text-yellow-700 text-xl">
-            Review contracts awaiting your action.
-          </p>
+        <div className="flex-1">
+          <NavLink to="/contract-farming/awaiting-contracts">
+            <div className="flex-1 bg-yellow-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
+              <h2 className="text-3xl font-semibold mb-6 text-yellow-800">
+                Awaiting Contracts
+              </h2>
+              <p className="text-yellow-700 text-xl">
+                Review contracts awaiting your action.
+              </p>
+            </div>
+          </NavLink>
         </div>
       </div>
     </div>

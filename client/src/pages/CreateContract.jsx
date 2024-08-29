@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateContract = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     farmer: "",
     farmerFather: "",
@@ -47,8 +49,12 @@ const CreateContract = () => {
         formData
       );
       if (response.status === 201) {
+        const contractId = response.data.contractId;
+
+        alert(`${currentUser.role}'s side contract ready`);
+        navigate(`/contract-farming/${contractId}`);
+
         // console.log(response.data);
-        
       }
     } catch (error) {
       if (error.response) {
