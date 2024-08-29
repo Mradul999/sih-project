@@ -23,8 +23,6 @@ export const signup = async (req, res) => {
       return res.status(403).json({ msg: "User already exists" });
     }
 
-    
-
     const hashedPassword = await bcrypt.hash(password, 10);
     const username =
       name.toLowerCase().replace(/\s+/g, "") +
@@ -53,8 +51,6 @@ export const signup = async (req, res) => {
   }
 };
 
-
-
 export const signin = async (req, res) => {
   try {
     const { phoneNo, password } = req.body;
@@ -71,5 +67,20 @@ export const signin = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: "Internal server Error" });
+  }
+};
+
+export const getSingleUser = async (req, res) => {
+  try {
+    const  userId  = req.body;
+    console.log(userId);
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };

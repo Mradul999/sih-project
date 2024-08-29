@@ -4,8 +4,17 @@ export const createContract = async (req, res) => {
   try {
     const {
       farmer,
+      farmerFather,
+      farmerAge,
+      farmerAddress,
+
+      buyerFather,
+      buyerAge,
+      buyerAddress,
+      farmSize,
       userId,
       buyer,
+
       cropType,
       contractStatus,
       quantity,
@@ -32,6 +41,14 @@ export const createContract = async (req, res) => {
       endDate,
       minMoney,
       termsAndConditions,
+      farmerFather,
+      farmerAge,
+      farmerAddress,
+
+      buyerFather,
+      buyerAge,
+      buyerAddress,
+      farmSize,
 
       paymentTerms,
     });

@@ -2,12 +2,40 @@ import mongoose from "mongoose";
 
 export const contractSchema = mongoose.Schema(
   {
-    userId:{
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
+    },
+    farmerFather: {
+      type: String,
 
     },
+    farmerAddress: {
+      type: String,
+
+    },
+    farmerAge: {
+      type: Number,
+
+    },
+    buyerFather: {
+      type: String,
+
+    },
+    buyerAddress: {
+      type: String,
+
+    },
+    buyerAge: {
+      type: Number,
+
+    },
+    farmSize: {
+      type: String,
+
+    },
+
     contractId: {
       type: String,
       required: true,
@@ -54,11 +82,11 @@ export const contractSchema = mongoose.Schema(
       default:
         "Law 1: The buyer must purchase the agreed quantity. Law 2: The farmer must deliver within the agreed timeframe.",
     },
-  
-    termsAndConditions:{
+
+    termsAndConditions: {
       type: String,
       required: true,
-      default:"These are our terms and conditions agree to them "
+      default: "These are our terms and conditions agree to them ",
     },
 
     paymentTerms: {

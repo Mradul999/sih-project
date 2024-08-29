@@ -70,12 +70,12 @@ const AddProduct = () => {
 
   const submitProductHandler = async (e) => {
     e.preventDefault();
-    const formData = {
+    const data = {
       ...formData,
       userId: currentUser?.currentUser?._id,
     };
     try {
-      const response = await axios.post("/api/product/addproduct", formData);
+      const response = await axios.post("/api/product/addproduct", data);
       if (response.status === 201) {
         alert("Product added successfully");
         setFormData({});
@@ -111,6 +111,16 @@ const AddProduct = () => {
             <label className="block text-lg font-semibold mb-2">Price</label>
             <input
               id="price"
+              type="number"
+              className="w-full p-2 border rounded-lg"
+              onChange={formChangeHandler}
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-lg font-semibold mb-2">Quantity</label>
+            <input
+              id="quantity"
               type="number"
               className="w-full p-2 border rounded-lg"
               onChange={formChangeHandler}

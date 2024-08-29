@@ -28,11 +28,11 @@ const YourContracts = () => {
   }, [currentUser]);
 
   return (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-6 grid grid-cols-1 md:grid-cols-2 min-h-screen lg:grid-cols-3 gap-6">
       {contracts.map((contract) => (
         <div
           key={contract._id}
-          className="bg-white text-xl p-6 rounded-lg shadow-lg transition-shadow"
+          className="bg-white text-xl h-[200px] p-6 rounded-lg shadow-lg transition-shadow"
         >
           <p className="text-gray-700">{`Buyer: ${contract.buyer?contract.buyer:"No buyer"}`}</p>
           <p className="text-gray-700">{`Farmer: ${contract.farmer?contract.farmer:"No farmer"}`}</p>

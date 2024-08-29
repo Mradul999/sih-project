@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import ContractFarming from "./pages/ContractFarming";
 import YourContracts from "./pages/YourContracts";
 import CreateContract from "./pages/CreateContract";
+import Payment from "./pages/Payment";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/contract-farming" element={<ContractFarming />}></Route>
           <Route path="/contract-farming/my-contracts" element={<YourContracts />}></Route>
           <Route path="/contract-farming/create-contract" element={<CreateContract />}></Route>
+          <Route path="/all-products/payment/:productId" element={<Payment/>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

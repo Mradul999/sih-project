@@ -16,7 +16,7 @@ export const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    amount: {
+    quantity: {
       type: Number,
       required: true,
     },
