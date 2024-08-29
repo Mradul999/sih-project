@@ -13,7 +13,7 @@ const CreateContract = () => {
     endDate: "",
     minMoney: "",
     buyer: "",
-    paymentTerms: "Advance", // Default value updated
+    paymentTerms: "Advance", 
     termsAndConditions: "",
     userId: "",
   });
@@ -105,8 +105,9 @@ const CreateContract = () => {
               name="farmer"
               value={formData.farmer}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className={`w-full px-3 py-2 border  border-gray-300 rounded-lg`}
               required
+              disabled={currentUser.role==="buyer"}
             />
           </div>
           <div className="mb-4">
@@ -118,6 +119,7 @@ const CreateContract = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               required
+              disabled={currentUser.role==="farmer"}
             />
           </div>
 

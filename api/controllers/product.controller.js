@@ -2,7 +2,7 @@ import Product from "../models/products.model.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const { name, price, description, image, category, userId } = req.body;
+    const { name, price, description, image, category,amount, userId } = req.body;
 
     const newProduct = new Product({
       userId,
@@ -11,6 +11,7 @@ export const addProduct = async (req, res) => {
       description,
       image,
       category,
+      amount
     });
     await newProduct.save();
     res.status(201).json(newProduct);
