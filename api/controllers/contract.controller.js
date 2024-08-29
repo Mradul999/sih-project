@@ -126,11 +126,12 @@ export const getAllContracts = async (req, res) => {
 
 export const getSingleContract = async (req, res) => {
   try {
-    const { contractId } = req.body;
+    const { contractId } = req.query;
+    console.log(contractId);
 
-    const contract = await Contract.findOne({ contractId });
+    const contract = await Contract.findOne({contractId});
     if (!contract) {
-      return res.json(404).json({
+      return res.status(404).json({
         message: "no contract found",
       });
     }
