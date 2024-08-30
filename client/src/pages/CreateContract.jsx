@@ -71,16 +71,22 @@ const CreateContract = () => {
           Contract Preview
         </h2>
         <div className="text-black">
-          <p>This AGREEMENT made this day of</p>
+          <p>This AGREEMENT made on this day of </p>
           <span>BETWEEN</span>
           <p>
             <strong> {formData?.buyer}</strong> <br></br>
-            Son of {formData.buyerFather} age about {formData.buyerAge} residing{" "}
-            {formData.buyerAddress}
+            Son of{" "}
+            <span className="font-bold">
+              {" "}
+              <strong>{formData.buyerFather}</strong>{" "}
+            </span>{" "}
+            age about {formData.buyerAge} residing{" "}
+            <strong>{formData.buyerAddress}</strong>
             <br></br> And <br></br>{" "}
             <span className="font-bold">{formData?.farmer}</span> Son of{" "}
-            {formData?.farmerFather} Age about {formData?.farmerAge} Residing{" "}
-            {formData.farmerAddress}
+            <span className="font-bold">{formData?.farmerFather}</span> Age
+            about <strong>{formData?.farmerAge}</strong> Residing{" "}
+            <strong>{formData.farmerAddress}</strong>
           </p>
           <br></br>
           <p>
@@ -116,12 +122,13 @@ const CreateContract = () => {
           <ol>
             <li>
               1.The Farmer undertake to grow in his agricultural land measuring
-              that the of acre {formData?.farmSize}.be acre the said crop at the
-              rate {formData?.pricePerUnit}crop cycle in a year or such other
-              crops as may be specified by the buyer in that regard. The farmer
-              has agree that the said land shall not be used for any other
-              purpose other than growing of the specified crop as mentioned in
-              this agreement.
+              that the of acre <strong> {formData?.farmSize}</strong>.be acre
+              the said crop at the rate{" "}
+              <strong>{formData?.pricePerUnit}</strong> crop cycle in a year or
+              such other crops as may be specified by the buyer in that regard.
+              The farmer has agree that the said land shall not be used for any
+              other purpose other than growing of the specified crop as
+              mentioned in this agreement.
             </li>
             <br />
             <li>
@@ -237,6 +244,55 @@ const CreateContract = () => {
             />
           </div>
           <div className="mb-4">
+            <label className="block text-gray-700 mb-2">
+              Farmer's Father's Name
+            </label>
+            <input
+              type="text"
+              name="farmerFather"
+              value={formData.farmerFather}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              required
+              disabled={currentUser.role === "buyer"}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Farmer's Address</label>
+            <input
+              type="text"
+              name="farmerAddress"
+              value={formData.farmerAddress}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              required
+              disabled={currentUser.role === "buyer"}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Farmer's Age</label>
+            <input
+              type="number"
+              name="farmerAge"
+              value={formData.farmerAge}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              required
+              disabled={currentUser.role === "buyer"}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Crop Type</label>
+            <input
+              type="text"
+              name="cropType"
+              value={formData.cropType}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
+          <div className="mb-4">
             <label className="block text-gray-700 mb-2">Buyer Name</label>
             <input
               type="text"
@@ -249,17 +305,6 @@ const CreateContract = () => {
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Crop Type</label>
-            <input
-              type="text"
-              name="cropType"
-              value={formData.cropType}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              required
-            />
-          </div>
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">
               Buyer's Father's Name
@@ -274,6 +319,7 @@ const CreateContract = () => {
               disabled={currentUser.role === "farmer"}
             />
           </div>
+
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">Buyer's Age</label>
             <input
@@ -298,44 +344,7 @@ const CreateContract = () => {
               disabled={currentUser.role === "farmer"}
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">
-              Farmer's Father's Name
-            </label>
-            <input
-              type="text"
-              name="farmerFather"
-              value={formData.farmerFather}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              required
-              disabled={currentUser.role === "buyer"}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Farmer's Age</label>
-            <input
-              type="number"
-              name="farmerAge"
-              value={formData.farmerAge}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              required
-              disabled={currentUser.role === "buyer"}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Farmer's Address</label>
-            <input
-              type="text"
-              name="farmerAddress"
-              value={formData.farmerAddress}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              required
-              disabled={currentUser.role === "buyer"}
-            />
-          </div>
+
           <div className="mb-4">
             <label className="block text-gray-700 mb-2">
               Farm Size (acres)
@@ -352,7 +361,9 @@ const CreateContract = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Quantity</label>
+            <label className="block text-gray-700 mb-2">
+              Quantity(Quintal)
+            </label>
             <input
               type="number"
               name="quantity"
@@ -400,7 +411,9 @@ const CreateContract = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 mb-2">Minimum Money</label>
+            <label className="block text-gray-700 mb-2">
+              Minimum Money(to be paid by the buyer in case of crop failure)
+            </label>
             <input
               type="number"
               name="minMoney"
@@ -431,6 +444,7 @@ const CreateContract = () => {
               Terms and Conditions
             </label>
             <textarea
+              placeholder="Enter your terms and conditions "
               name="termsAndConditions"
               value={formData.termsAndConditions}
               onChange={handleChange}

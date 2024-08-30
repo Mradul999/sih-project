@@ -41,11 +41,11 @@ const userSchema = new mongoose.Schema(
 
     farmSize: {
       type: String,
-      required: true,
+      
     },
     khatoni: {
       type: String,
-      required: true,
+   
     },
     aadhar: {
       type: String,
