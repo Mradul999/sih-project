@@ -73,7 +73,7 @@ export const signin = async (req, res) => {
 export const getSingleUser = async (req, res) => {
   try {
     const  userId  = req.body;
-    console.log(userId);
+    // console.log(userId);
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
@@ -84,3 +84,25 @@ export const getSingleUser = async (req, res) => {
     res.status(500).json({ msg: "Internal Server Error" });
   }
 };
+
+
+
+export const getUserByState = async (req, res) => {
+  try {
+    const { state } = req.query; // Get the state from req.query
+    // console.log(state);
+    const users = await User.find({ state }); // Fetch users by state
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({ msg: "No users found" });
+    }
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+

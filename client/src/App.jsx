@@ -19,6 +19,7 @@ import Payment from "./pages/Payment";
 import ContractId from "./pages/ContractId";
 import AwaitingContracts from "./pages/AwaitingContracts";
 import Communities from "./pages/Communities";
+import Search from "./pages/Search";
 
 const App = () => {
   return (
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/communities" element={<Communities/>}></Route>
 
           <Route path="/contract-farming/awaiting-contracts" element={<AwaitingContracts/>}></Route>
+          <Route path="/search" element={<Search/>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
