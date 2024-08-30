@@ -42,7 +42,7 @@ const Signin = () => {
   };
 
   return (
-    <div class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-gray-100  flex items-center justify-center h-screen">
       <div class="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={submitHandler}>

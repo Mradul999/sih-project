@@ -64,7 +64,27 @@ export const createContract = async (req, res) => {
 
 export const acceptContract = async (req, res) => {
   try {
-    const { contractId, acceptedBy, name } = req.body;
+    const {
+      contractId,
+      acceptedBy,
+      name,
+      farmerFather,
+      farmerAge,
+      farmerAddress,
+      cropType,
+      quantity,
+      pricePerUnit,
+      startDate,
+      endDate,
+      minMoney,
+      buyerFather,
+      buyerAge,
+      buyerAddress,
+      farmSize,
+      paymentTerms,
+      termsAndConditions,
+      userId,
+    } = req.body;
 
     const contract = await Contract.findOne({ contractId });
 
@@ -77,10 +97,35 @@ export const acceptContract = async (req, res) => {
     if (acceptedBy === "farmer") {
       if (!contract.farmer) {
         contract.farmer = name;
+        contract.farmerFather = farmerFather;
+        contract.farmerAge = farmerAge;
+        contract.farmerAddress = farmerAddress;
+        contract.cropType = cropType;
+        contract.quantity = quantity;
+        contract.pricePerUnit = pricePerUnit;
+        contract.startDate = startDate;
+        contract.endDate = endDate;
+        contract.minMoney = minMoney;
+        contract.farmSize = farmSize;
+        contract.paymentTerms = paymentTerms;
+        contract.termsAndConditions = termsAndConditions;
+        contract.userId = userId;
       }
     } else if (acceptedBy === "buyer") {
       if (!contract.buyer) {
         contract.buyer = name;
+        contract.buyerFather = buyerFather;
+        contract.buyerAge = buyerAge;
+        contract.buyerAddress = buyerAddress;
+        contract.paymentTerms = paymentTerms;
+        contract.termsAndConditions = termsAndConditions;
+        contract.userId = userId;
+        contract.cropType = cropType;
+        contract.quantity = quantity;
+        contract.pricePerUnit = pricePerUnit;
+        contract.startDate = startDate;
+        contract.endDate = endDate;
+        contract.minMoney = minMoney;
       }
     } else {
       return res.status(400).json({
@@ -88,6 +133,7 @@ export const acceptContract = async (req, res) => {
       });
     }
 
+    // Check if both farmer and buyer have accepted the contract
     if (contract.farmer && contract.buyer) {
       contract.contractStatus = "Active";
     }
@@ -105,6 +151,7 @@ export const acceptContract = async (req, res) => {
     });
   }
 };
+
 
 export const getAllContracts = async (req, res) => {
   try {

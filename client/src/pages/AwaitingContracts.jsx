@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
 const AwaitingContracts = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [contract, setContract] = useState(null);
+  console.log("contract",contract);
+  const currentUser=useSelector((state)=>state.user.currentUser);
   const [formData, setFormData] = useState({
     farmer: "",
     farmerFather: "",
@@ -24,12 +26,13 @@ const AwaitingContracts = () => {
     paymentTerms: "Advance",
     termsAndConditions: "",
     userId: "",
-
-    // Add other form fields here
   });
+
+
+  console.log("formData",formData)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const currentUser = { role: "buyer" }; // Assume currentUser is provided from context or props
+ 
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -53,14 +56,12 @@ const AwaitingContracts = () => {
     if (contract) {
       setFormData({
         farmer: contract.farmer || "",
-
         farmerFather: contract.fatherName || "",
         farmerFather: contract.farmerFather || "",
         farmerAge: contract.farmer || "",
         farmerAddress: contract.farmerAddress || "",
         cropType: contract.cropType || "",
         quantity: contract.quantity || "",
-
         pricePerUnit: contract.pricePerUnit || "",
         startDate: contract.startDate || "",
         endDate: contract.endDate || "",
@@ -84,9 +85,22 @@ const AwaitingContracts = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    try {
+      const response = await axios.post(
+        "/api/contract/acceptcontract",
+        {formData,acceptedBy:currentUser.role,contractId:searchTerm}
+      );
+      if (response.status == 200) {
+        alert("Contract accepted successfully");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log(error);
+        alert(error.message);
+      }
+    }
   };
 
   return (

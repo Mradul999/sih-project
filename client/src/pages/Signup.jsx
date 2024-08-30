@@ -141,7 +141,7 @@ const Signup = () => {
   console.log("formData", formData);
 
   return (
-    <div className="flex bg bg-gray-100 items-center justify-center py-10 min-h-screen  ">
+    <div className="flex  bg-gray-100 items-center justify-center py-10 min-h-screen  ">
       <div className=" bg-white p-8 rounded-lg shadow-lg w-full  max-w-4xl">
         <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
         <form onSubmit={submitHandler}>

@@ -9,7 +9,7 @@ export const signup = async (req, res) => {
       password,
       role,
       pincode,
-      state,
+      state,  
       aadhar,
       district,
       address,

@@ -18,6 +18,7 @@ import CreateContract from "./pages/CreateContract";
 import Payment from "./pages/Payment";
 import ContractId from "./pages/ContractId";
 import AwaitingContracts from "./pages/AwaitingContracts";
+import Communities from "./pages/Communities";
 
 const App = () => {
   return (
@@ -57,6 +58,7 @@ const App = () => {
             path="/all-products/payment/:productId"
             element={<Payment />}
           ></Route>
+          <Route path="/communities" element={<Communities/>}></Route>
 
           <Route path="/contract-farming/awaiting-contracts" element={<AwaitingContracts/>}></Route>
         </Routes>
