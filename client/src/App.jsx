@@ -20,6 +20,20 @@ import ContractId from "./pages/ContractId";
 import AwaitingContracts from "./pages/AwaitingContracts";
 import Communities from "./pages/Communities";
 import Search from "./pages/Search";
+import CasestudyDetail from "./pages/CaseStudyDetail";
+import About from "./pages/About";
+import BlogDetail from "./pages/BlogDetail";
+import CommunityDetail from "./pages/CommunityDetail";
+import CreateBid from "./pages/CreateBid";
+import VerifyOtp from "./pages/VerifyOtp";
+import CompleteProfile from "./pages/CompleteProfile";
+
+import ChangePassword from "./pages/ChangePassword";
+import ResetPassword from "./pages/ResetPassword";
+import BackProtected from "./components/BackProtected";
+import UpdateProfile from "./pages/UpdateProfile";
+import YeildPredictor from "./pages/YeildPredictor";
+import CategoryPage from "./pages/CategoryPage";
 
 const App = () => {
   return (
@@ -32,8 +46,22 @@ const App = () => {
             element={<AddProduct></AddProduct>}
           ></Route>
           <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/sign-in" element={<Signin></Signin>}></Route>
-          <Route path="/sign-up" element={<Signup></Signup>}></Route>
+          <Route
+            path="/sign-in"
+            element={
+              <BackProtected>
+                <Signin />
+              </BackProtected>
+            }
+          ></Route>
+          <Route
+            path="/sign-up"
+            element={
+              <BackProtected>
+                <Signup />
+              </BackProtected>
+            }
+          ></Route>
           <Route path="/all-products" element={<AllProducts />}></Route>
           <Route path="/tutorials" element={<Tutorials />}></Route>
           <Route
@@ -54,15 +82,36 @@ const App = () => {
             path="/contract-farming/create-contract"
             element={<CreateContract />}
           ></Route>
-          <Route path="/contract-farming/:contractId" element={<ContractId/>}></Route>
+          <Route
+            path="/contract-farming/:contractId"
+            element={<ContractId />}
+          ></Route>
           <Route
             path="/all-products/payment/:productId"
             element={<Payment />}
           ></Route>
-          <Route path="/communities" element={<Communities/>}></Route>
+          <Route path="/communities" element={<Communities />}></Route>
 
-          <Route path="/contract-farming/awaiting-contracts" element={<AwaitingContracts/>}></Route>
-          <Route path="/search" element={<Search/>}></Route>
+          <Route
+            path="/contract-farming/awaiting-contracts"
+            element={<AwaitingContracts />}
+          ></Route>
+          <Route path="/search" element={<Search />}></Route>
+          <Route path="/casestudy/:id" element={<CasestudyDetail />} />
+          <Route path="/blog/:title" element={<BlogDetail />} />
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/community/:id" element={<CommunityDetail />} />
+          <Route path="/create-bid" element={<CreateBid />}></Route>
+          <Route path="/verify-otp" element={<VerifyOtp />}></Route>
+          <Route path="/complete-profile" element={<CompleteProfile />}></Route>
+          <Route
+            path="/change-password/:token"
+            element={<ChangePassword />}
+          ></Route>
+          <Route path="user-profile" element={<UpdateProfile />}></Route>
+          <Route path="reset-password" element={<ResetPassword />}></Route>
+          <Route path="yeild-predictor" element={<YeildPredictor />}></Route>
+          <Route path="/category/:slug" element={<CategoryPage />} />
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

@@ -1,12 +1,16 @@
+import { current } from "@reduxjs/toolkit";
 import React from "react";
+import { useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const ContractFarming = () => {
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   return (
     <div className="">
-      <div className="w-full h-[500px] bg-gray-200 rounded-lg overflow-hidden shadow-lg  ">
+      <div className="w-full h-[500px]  bg-gray-200 rounded-lg overflow-hidden shadow-lg  ">
         <img
           src="https://th.bing.com/th/id/OIP.4OEj5mUH1dOuhRm39uiR1AHaEH?rs=1&pid=ImgDetMain"
           alt="Contract Farming"
@@ -32,8 +36,12 @@ const ContractFarming = () => {
       </p>
 
       <div className="flex flex-col lg:flex-row mt-8 gap-6 p-6">
-        <NavLink to="/contract-farming/my-contracts">
-          <div className="flex-1 bg-blue-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
+        {/* <NavLink to="/contract-farming/my-contracts">
+          <div
+            className={`flex-1 bg-blue-100 p-8 rounded-lg shadow-lg text-center cursor-pointer ${
+              currentUser.role === "buyer" && "hidden"
+            }`}
+          >
             <h2 className="text-3xl font-semibold mb-6 text-blue-800">
               Your Contracts
             </h2>
@@ -41,7 +49,28 @@ const ContractFarming = () => {
               View and manage your existing contracts.
             </p>
           </div>
-        </NavLink>
+        </NavLink> */}
+        <div className={`flex-1 ${currentUser?.role==="farmer" && "hidden"}`}>
+          <NavLink to="/create-bid">
+            <div className="flex-1 bg-blue-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
+              <h2 className="text-3xl font-semibold mb-6 text-blue-800">
+                Create Bid
+              </h2>
+              <p className="text-blue-700 text-xl">Create your bid</p>
+            </div>
+          </NavLink>
+        </div>
+        <div className="flex-1">
+          <NavLink to="/create-bid">
+            <div className="flex-1 bg-blue-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
+              <h2 className="text-3xl font-semibold mb-6 text-blue-800">
+                Bid Zone
+              </h2>
+              <p className="text-blue-700 text-xl">Bid zone</p>
+            </div>
+          </NavLink>
+        </div>
+
         <div className="flex-1">
           <NavLink to="/contract-farming/create-contract">
             <div className="flex-1 bg-green-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
@@ -52,7 +81,7 @@ const ContractFarming = () => {
             </div>
           </NavLink>
         </div>
-        <div className="flex-1">
+        <div className={`flex-1 ${currentUser?.role==="farmer" && "hidden"}`}>
           <NavLink to="/contract-farming/awaiting-contracts">
             <div className="flex-1 bg-yellow-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
               <h2 className="text-3xl font-semibold mb-6 text-yellow-800">

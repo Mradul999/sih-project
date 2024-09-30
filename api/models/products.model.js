@@ -32,6 +32,10 @@ export const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    productLink:{
+      type: String,
+      required: true,
+    }
   },
   { timeStamps: true }
 );

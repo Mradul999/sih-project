@@ -38,15 +38,29 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    profilePic: {
+      type: String,
+      default:
+        "userprofile.jpg",
+    },
 
     farmSize: {
       type: String,
-      
     },
     khatoni: {
       type: String,
-   
     },
+    cropQuality: {
+      type: String,
+    },
+    GST: {
+      type: String,
+    },
+    email: {
+      type: String,
+      unique: true,
+    },
+
     aadhar: {
       type: String,
       required: true,

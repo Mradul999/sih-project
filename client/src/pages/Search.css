@@ -1,0 +1,41 @@
+.Addcase {
+  display: flex;
+  min-height: 500px;
+  width: 420px;
+  flex-direction: column;
+  border: 2px solid black;
+  /* justify-content: center; */
+  /* align-items: center; */
+  border-radius: 8px;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+.Addcase img {
+  height: 400px;
+  width: 400px;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+#title {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: larger;
+  color: green;
+  margin: 5px;
+  padding: 5px;
+}
+
+#description::first-letter {
+  text-transform: capitalize;
+}
+#description {
+  margin: 5px;
+  padding: 5px;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-const Blogs = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const BlogDetail = () => {
+  const { title } = useParams();
 
   const blogs = [
     {
@@ -30,8 +30,7 @@ const Blogs = () => {
           The land between the plant rows remain dry and unwanted plant growth is prevented
       
       Apart from the good yield, the new techniques helped him save labour cost for irrigation, fertiliser application and removal of weeds. And guess what, he saved around Rs. 6,000 per acre.`,
-      imageUrl:
-        "https://mahadhan.co.in/wp-content/uploads/2017/11/Yielding.jpg",
+      imageUrl: "https://mahadhan.co.in/wp-content/uploads/2017/11/Yielding.jpg",
     },
     {
       title: "Cotton farming – the success story",
@@ -48,8 +47,7 @@ const Blogs = () => {
       Mr. Ingle also recommends using BT Cotton farming as the BT variety of cotton is more resistant to pests and yields a good produce as well.
       
       Of course, there are a lot of other important things you must follow to get a good yield of cotton.`,
-      imageUrl:
-        "https://mahadhan.co.in/wp-content/uploads/2017/10/wheat-farming-1170150.jpg",
+      imageUrl: "https://mahadhan.co.in/wp-content/uploads/2017/10/wheat-farming-1170150.jpg",
     },
     {
       title: "7 tips to Get the Best Tomato Yield",
@@ -61,8 +59,7 @@ const Blogs = () => {
       Keep removing the bottom leaves: Once your plants reach above 3 feet, remove the bottom leaves as they’re the first ones to develop fungus issues. They’re also the oldest, and get lesser and lesser amount of sun and airflow. These also give rise to soil-borne pathogens that can deteriorate the harvest later on.
       Water without fail: Tomato crop thrives on loamy, well-drained soil and therefore, water deeply and regularly without skipping. Irregular watering can lead to blossom-end rot and cracking, so, especially during summer season, irrigation every 5–7 days is necessary, whereas in winter, a 10 to 15-day interval is sufficient.
       Don’t forget to mulch: Mulching conserves water and prevents the soil from diseases moving up across the plants. For efficient mulching, bring into use black LDPE sheets of 25-micron thickness and bury both the ends into the soil to a depth of 10 cm.`,
-      imageUrl:
-        "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_76223515.jpg",
+      imageUrl: "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_76223515.jpg",
     },
     {
       title: "Potato – diseases and symptoms",
@@ -71,8 +68,7 @@ const Blogs = () => {
       Late blight: Late blight damages leaves, stems and tubers (potatoes). Affected leaves appear blistered as if scalded by hot water and eventually rot and dry out. To treat late blight, plant resistant cultivators are used. You should also use soaker hoses to give plants time to dry out during the day as the disease develops in humid conditions.
       Bacterial Wilt: In this disease, the infected plant first begins to wilt and spreads to all parts of the plant. Leaves become yellow at their bases. Then the whole plant wilts and dies. Bacterial wilt has no cure. However, it can be controlled using methods of crop rotation, selecting suitable sites, using certified seeds and uprooting diseased plants.
       Blackheart disorder: Blackheart occurs primarily in storage when the tubers do not receive enough oxygen. The potatoes develop acute oxygen deficiency that results in blackening at the center. The tissue dies from the inside out and turns jet black. The disease occurs either due to low temperature in confined storage or high field soil temperatures. Blackheart can be prevented through good ventilation in storage, avoiding flooded areas and extreme temperatures.`,
-      imageUrl:
-        "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_94720522.jpg",
+      imageUrl: "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_94720522.jpg",
     },
     {
       title: "Desert Dunes",
@@ -104,8 +100,7 @@ const Blogs = () => {
        
       
       7: Use pesticides and insecticides as necessary: Wheat crop is not averse to slugs and insects that can wreak havoc on the plantation, especially when the wheat is still very short. Use chemicals like Chlorpyrifos and acetamiprid in such a case that effectively manage the insects.`,
-      imageUrl:
-        "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_94720522.jpg",
+      imageUrl: "https://mahadhan.co.in/wp-content/uploads/2017/10/shutterstock_94720522.jpg",
     },
     {
       title: "Calm Lake",
@@ -130,42 +125,23 @@ const Blogs = () => {
     },
   ];
 
-  const filteredBlogs = blogs.filter(
-    (blog) =>
-      blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      blog.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const blog = blogs.find((b) => b.title === decodeURIComponent(title));
+
+  if (!blog) {
+    return <p>Blog not found</p>;
+  }
 
   return (
-    <div className="p-6">
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search blogs..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-3 w-full border rounded-lg mb-4"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredBlogs.map((blog, index) => (
-          <Link to={`/blog/${encodeURIComponent(blog.title)}`} key={index}>
-            <div className="border p-2 h-[400px] rounded-lg shadow-lg">
-              <h2 className="text-2xl font-semibold mb-4">{blog.title}</h2>
-              <img
-                src={blog.imageUrl}
-                alt={blog.title}
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-              <p className="line-clamp-2">{blog.description}</p>
-            </div>
-          </Link>
-        ))}
-        {filteredBlogs.length === 0 && <p>No blogs found.</p>}
-      </div>
+    <div className="p-6  min-h-screen">
+      <h1 className="text-4xl  font-bold mb-8">{blog.title}</h1>
+      <img
+        src={blog.imageUrl}
+        alt={blog.title}
+        className="w-full h-72 object-cover  rounded-lg mb-8"
+      />
+      <p>{blog.description}</p>
     </div>
   );
 };
 
-export default Blogs;
+export default BlogDetail;

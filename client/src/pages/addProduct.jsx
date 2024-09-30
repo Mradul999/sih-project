@@ -120,7 +120,8 @@ const AddProduct = () => {
           <div>
             <label className="block text-lg font-semibold mb-2">Quantity</label>
             <input
-              id="quantity"
+              id="quantity
+              "
               type="number"
               className="w-full p-2 border rounded-lg"
               onChange={formChangeHandler}

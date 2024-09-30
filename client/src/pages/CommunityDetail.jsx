@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const Communities = () => {
+const CommunityDetail = () => {
+  const { id } = useParams();
+
   const communities = [
     {
       id: 1,
@@ -23,22 +25,23 @@ const Communities = () => {
     },
   ];
 
+  const community = communities.find((c) => c.id === parseInt(id));
+
+  if (!community) {
+    return <p>Community not found</p>;
+  }
+
   return (
     <div className="p-6 min-h-screen">
-      <h1 className="text-4xl font-bold text-center mb-8">Welcome to Our Community</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {communities.map((community) => (
-          <Link key={community.id} to={`/community/${community.id}`} className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <img src={community.image} alt={community.name} className="w-full h-48 object-cover" />
-            <div className="p-6">
-              <h2 className="text-2xl font-semibold mb-2">{community.name}</h2>
-              <p className="text-gray-700">{community.description}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <h1 className="text-4xl font-bold mb-4">{community.name}</h1>
+      <img
+        src={community.image}
+        alt={community.name}
+        className="w-full h-64 object-contain rounded-lg mb-4"
+      />
+      <p>{community.description}</p>
     </div>
   );
 };
 
-export default Communities;
+export default CommunityDetail;

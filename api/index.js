@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 
 import signupRoute from "./routes/auth.route.js";
 import addproductRoute from "./routes/product.route.js";
-import createContract from "./routes/contract.route.js";
+import otpRoute from "./routes/sendotp.route.js";
+
 import paymentRoute from "./routes/payment.route.js";
 
 import dotenv from "dotenv";
@@ -19,7 +20,7 @@ mongoose
 
 app.use("/api/auth", signupRoute);
 app.use("/api/product", addproductRoute);
-app.use("/api/contract", createContract);
+app.use("/api/otp", otpRoute);
 app.use("/api/payment", paymentRoute);
 
 app.listen(process.env.PORT, () => {
