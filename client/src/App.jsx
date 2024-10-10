@@ -34,6 +34,7 @@ import BackProtected from "./components/BackProtected";
 import UpdateProfile from "./pages/UpdateProfile";
 import YeildPredictor from "./pages/YeildPredictor";
 import CategoryPage from "./pages/CategoryPage";
+import AllBids from "./pages/AllBids";
 
 const App = () => {
   return (
@@ -112,6 +113,8 @@ const App = () => {
           <Route path="reset-password" element={<ResetPassword />}></Route>
           <Route path="yeild-predictor" element={<YeildPredictor />}></Route>
           <Route path="/category/:slug" element={<CategoryPage />} />
+
+          <Route path="/all-bids" element={<AllBids/>}></Route>
         </Routes>
         <Footer></Footer>
       </BrowserRouter>

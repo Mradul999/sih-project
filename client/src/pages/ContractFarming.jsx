@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 
 const ContractFarming = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  console.log(currentUser);
 
   return (
     <div className="">
@@ -61,7 +62,7 @@ const ContractFarming = () => {
           </NavLink>
         </div>
         <div className="flex-1">
-          <NavLink to="/create-bid">
+          <NavLink to="/all-bids">
             <div className="flex-1 bg-blue-100 p-8 rounded-lg shadow-lg text-center cursor-pointer">
               <h2 className="text-3xl font-semibold mb-6 text-blue-800">
                 Bid Zone
